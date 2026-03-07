@@ -18,7 +18,6 @@
 [![Express](https://img.shields.io/badge/Express-000000?style=flat-square&logo=express&logoColor=white)](https://expressjs.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
-[Live Demo](#) · [Report Bug](https://github.com/sanjay-ram07/pulsechat/issues) · [Request Feature](https://github.com/sanjay-ram07/pulsechat/issues)
 
 </div>
 
@@ -171,11 +170,6 @@ Contributions are welcome! To get started:
 
 Please open an issue first for major changes to discuss what you'd like to change.
 
----
-
-## License
-
-Distributed under the MIT License. See [`LICENSE`](LICENSE) for details.
 
 ---
 
@@ -192,3 +186,4 @@ Full Stack Developer · Node.js · React · C++
 <div align="center">
   <sub>Built with ❤️ using Node.js and Socket.IO</sub>
 </div>
+
