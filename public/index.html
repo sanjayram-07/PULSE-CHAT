@@ -1,40 +1,126 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+
+    <title>Chat Login</title>
+
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #020617;
+            font-family: sans-serif;
+            color: white;
+        }
+
+        .container {
+            background: #0f172a;
+            padding: 40px;
+            border-radius: 12px;
+            width: 350px;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            border: none;
+            background: #020617;
+            color: white;
+            border: 1px solid #1e293b;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #3b82f6;
+            border: none;
+            border-radius: 6px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #2563eb;
+        }
+
+        .toggle {
+            text-align: center;
+            margin-top: 15px;
+            cursor: pointer;
+            color: #60a5fa;
+        }
+    </style>
+
 </head>
+
 <body>
-    <h1 class="title-tag">Chat App💬</h1>
+
     <div class="container">
-        <div id="input-user">
-            <span>User Name:</span>
-            <input type="text" id="username" value="anonymous">
-        </div>
 
-        <ul class="msg-container" id="msg-container">
+        <h2 id="title">Login</h2>
 
-         
+        <input id="username" placeholder="Username">
 
+        <input id="phone" placeholder="Phone Number">
 
-            <li class="feedback">
-                <p>
-                </p>
-            </li>
+        <button onclick="login()">Login</button>
 
-        </ul>
+        <p class="toggle" onclick="signup()">Create Account</p>
 
-        <form class="msg-form" id="msg-form" autocomplete="off">
-            <input type="text" name="message" class="msg-input" id="msg-input">
-            <div class="divider"></div>
-            <button type="submit" class="submit">send ➤</button>
-        </form>
-
-        <h3 class="total-clients">Online Users: 2</h3>
     </div>
-    <script src="socket.io/socket.io.js"></script>
-    <script src ="main.js"></script>
+
+    <script>
+
+        function login() {
+
+            const username = document.getElementById("username").value;
+            const phone = document.getElementById("phone").value;
+
+            if (username === "" || phone === "") {
+                alert("Enter username and phone");
+                return;
+            }
+
+            localStorage.setItem("username", username);
+            localStorage.setItem("phone", phone);
+
+            window.location = "chat.html";
+
+        }
+
+        function signup() {
+
+            const username = document.getElementById("username").value;
+            const phone = document.getElementById("phone").value;
+
+            if (username === "" || phone === "") {
+                alert("Enter username and phone");
+                return;
+            }
+
+            localStorage.setItem("username", username);
+            localStorage.setItem("phone", phone);
+
+            alert("Account created");
+
+            window.location = "chat.html";
+
+        }
+
+    </script>
+
 </body>
+
 </html>

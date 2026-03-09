@@ -12,7 +12,7 @@ app.use(express.static(path.join(__dirname,'public')));
 io.on('connection',Clientconnected);
 
 const totalClient = new Set();
-
+let users = {};
 
 function Clientconnected(socket){
 
@@ -35,7 +35,20 @@ function Clientconnected(socket){
     socket.broadcast.emit('feedback',data);
 });
 
+
+socket.on("register", (phone) => {
+        if (phone) {
+            users[phone] = socket.id;
+            console.log("Registered:", phone);
+        }
+    });
+
+
+    socket.on("privateMessage", (data) => {
+        const receiverSocket = users[data.receiver];
+        if (receiverSocket) {
+            io.to(receiverSocket).emit("privateMessage", data);
+        }
+    });
+
 }
-
-
-

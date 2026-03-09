@@ -4,6 +4,12 @@ socket.on('connect',()=>{
     console.log("connected to server");
 });
 
+
+const phone = localStorage.getItem("phone");
+if (phone) {
+    socket.emit("register", phone);
+}
+
 const clientsTotal = document.getElementsByClassName('total-clients')[0];
 const messageForm = document.getElementById('msg-form');
 const nameInput = document.getElementById('username');
@@ -21,20 +27,49 @@ socket.on('clients',(data)=>
     clientsTotal.innerHTML=`Online Users: ${data}`;
 })
 
-function message()
+
+  function message()
 {
-    if(messageInput.value ==='' || nameInput.value ==='') return;
+    const receiverPhone = document.getElementById("phone").value;
+
+    if(messageInput.value === '' || nameInput.value === ''){
+        alert("Please enter your name and message");
+        return;
+    }
+
     const data ={
-        username:nameInput.value,
-        message:messageInput.value,
-        dataTime: new Date().toLocaleString()
+        username: nameInput.value,
+        message: messageInput.value,
+        dateTime: new Date().toLocaleString()
+    };
+
+    if(receiverPhone){
+
+        const privateData = {
+            sender: phone,
+            receiver: receiverPhone,
+            username: nameInput.value,
+            message: messageInput.value,
+            dateTime: new Date().toLocaleString()
+        };
+
+        socket.emit("privateMessage", privateData);
+        addmessagetoUI(true, privateData);
 
     }
-    socket.emit('message',data);
-    addmessagetoUI(true,data);
+
+    else{
+        socket.emit('message',data);
+        addmessagetoUI(true,data);
+    }
     messageInput.value='';
 }
 
+socket.on("privateMessage",(data)=>{
+
+    addmessagetoUI(false,data);
+
+});
 
 socket.on('chat-msg',(data)=>{
     addmessagetoUI(false,data);
@@ -92,4 +127,4 @@ function removeFeedback()
         element.parentNode.removeChild(element);
     })
     
-}
+}   
