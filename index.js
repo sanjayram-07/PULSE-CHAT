@@ -1,9 +1,9 @@
-const { Socket } = require('dgram');
 const express = require('express');
 const path = require('path');
 const app = express();
+require('dotenv').config();
 
-const server = app.listen(3000,'0.0.0.0');
+const server = app.listen(process.env.PORT ||3000);
 
 const io = require('socket.io')(server);
 app.use(express.static(path.join(__dirname,'public')));
