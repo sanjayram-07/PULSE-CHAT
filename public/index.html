@@ -73,54 +73,85 @@
 
         <input id="username" placeholder="Username">
 
-        <input id="phone" placeholder="Phone Number">
+        <input id="phone" placeholder="Unique Number">
+
+        <input id="password" placeholder="Password" type="password">
 
         <button onclick="login()">Login</button>
 
-        <p class="toggle" onclick="signup()">Create Account</p>
+        <p class="toggle" onclick="signup()">Sign Up</p>
 
     </div>
 
     <script>
 
-        function login() {
+        async function login() {
 
             const username = document.getElementById("username").value;
             const phone = document.getElementById("phone").value;
+            const password = document.getElementById("password").value;
 
-            if (username === "" || phone === "") {
-                alert("Enter username and phone");
+            if (username === "" || phone === "" || password === "") {
+                alert("Please enter all fields");
                 return;
             }
 
-            localStorage.setItem("username", username);
-            localStorage.setItem("phone", phone);
+            const res = await fetch("/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    phone,
+                    password
+                })
+            });
 
-            window.location = "chat.html";
+            const data = await res.json();
 
+            if (data.status === "success") {
+
+                localStorage.setItem("username", data.username);
+                localStorage.setItem("phone", data.phone);
+
+                window.location = "chat.html";
+
+            } else {
+                alert(data.status);
+            }
         }
 
-        function signup() {
+
+        async function signup() {
 
             const username = document.getElementById("username").value;
             const phone = document.getElementById("phone").value;
+            const password = document.getElementById("password").value;
 
-            if (username === "" || phone === "") {
-                alert("Enter username and phone");
+            if (username === "" || phone === "" || password === "") {
+                alert("Please enter all fields");
                 return;
             }
 
-            localStorage.setItem("username", username);
-            localStorage.setItem("phone", phone);
+            const res = await fetch("/signup", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    username,
+                    phone,
+                    password
+                })
+            });
 
-            alert("Account created");
+            const data = await res.json();
 
-            window.location = "chat.html";
+            alert(data.status);
 
         }
 
     </script>
-
 </body>
 
 </html>

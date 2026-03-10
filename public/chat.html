@@ -1,42 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <title>PULSE CHAT</title>
 </head>
+
 <body>
+
     <h1 class="title-tag">PULSE CHAT💬</h1>
+
     <div class="container">
+
         <div id="input-user">
+
             <span>User Name:</span>
-            <input type="text" id="username" value="">
+            <input type="text" id="username">
+
             <span>Phone number:</span>
-            <input type="text" id="phone" value="" placeholder="Reciever Number">
+            <input type="text" id="phone" placeholder="Receiver Number">
+
         </div>
 
         <ul class="msg-container" id="msg-container">
 
-         
-
-
             <li class="feedback">
-                <p>
-                </p>
+                <p></p>
             </li>
 
         </ul>
 
         <form class="msg-form" id="msg-form" autocomplete="off">
+
             <input type="text" name="message" class="msg-input" id="msg-input">
+
             <div class="divider"></div>
+
             <button type="submit" class="submit">send ➤</button>
+
         </form>
 
-        <h3 class="total-clients">Online Users: 2</h3>
+        <h3 class="total-clients">Online Users: 0</h3>
+
     </div>
+
     <script src="socket.io/socket.io.js"></script>
-    <script src ="main.js"></script>
+    <script src="main.js"></script>
+
+    <script>
+
+        const username = localStorage.getItem("username");
+        const phone = localStorage.getItem("phone");
+
+        if (!username || !phone) {
+            alert("Please login first");
+            window.location = "index.html";
+        }
+
+        document.getElementById("username").value = username;
+
+    </script>
+
 </body>
+
 </html>

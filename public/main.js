@@ -32,7 +32,7 @@ socket.on('clients',(data)=>
 {
     const receiverPhone = document.getElementById("phone").value;
 
-    if(messageInput.value === '' || nameInput.value === ''){
+    if(messageInput.value.trim() === '' || nameInput.value === ''){
         alert("Please enter your name and message");
         return;
     }
@@ -81,7 +81,7 @@ function addmessagetoUI(isownmsg,data)
     const element = `
    <li class="${isownmsg?'right-msg':'left-msg'}">
                 <p class="msg">
-                    ${data.message} <span>${data.username}  ${data.dataTime}</span>
+                    ${data.message} <span>${data.username}  ${data.dateTime}</span>
                 </p>
             </li>
     `;
