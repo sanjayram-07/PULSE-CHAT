@@ -10,7 +10,7 @@ app.use(express.json());
 const mongoose = require("mongoose");
 
 
-mongoose.connect(process.env.MONGO_URI || "mongodb://msanjayram07_db_user:Ukp4nIN1JVB4V9Lk@ac-rgzqc0x-shard-00-00.kgvsojm.mongodb.net:27017,ac-rgzqc0x-shard-00-01.kgvsojm.mongodb.net:27017,ac-rgzqc0x-shard-00-02.kgvsojm.mongodb.net:27017/pulsechat?ssl=true&replicaSet=atlas-nrqyvl-shard-0&authSource=admin&appName=Cluster0")
+mongoose.connect(process.env.MONGO_URI)
 .then(() => {
     console.log("MongoDB Connected");
 }).catch(err => {
